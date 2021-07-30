@@ -1,0 +1,16 @@
+[dependencies]
+structopt = "0.3.21"
+anyhow = "1.0.42"
+
+[package]
+name = "akdb-server"
+version = "0.1.0"
+authors = ["Brian3647 <victoris3647@gmail.com>"]
+license = "MIT OR Apache-2.0"
+description = "A simple DataBase sistem made in rust"
+readme = "README.md"
+homepage = "https://github.com/Ak-DataBase/AkDB"
+repository = "https://github.com/Ak-DataBase/AkDB"
+keywords = ["db", "database"]
+categories = ["database-interfaces"]
+edition = "2018"

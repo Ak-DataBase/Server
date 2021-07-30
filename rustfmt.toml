@@ -1,0 +1,7 @@
+tab_spaces = 2
+newline_style = "Unix"
+hard_tabs = true
+indent_style = "Block"
+reorder_imports = true
+reorder_modules = true
+use_field_init_shorthand = true
