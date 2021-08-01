@@ -1,0 +1,19 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - dom
+      - sub
+  pull_request:
+    branches:
+      - dom
+      - sub
+
+jobs:
+  lint:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - run: cargo build
+    

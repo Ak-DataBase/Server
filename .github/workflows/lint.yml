@@ -1,0 +1,19 @@
+name: Lint
+
+on:
+  push:
+    branches:
+      - dom
+      - sub
+  pull_request:
+    branches:
+      - dom
+      - sub
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - run: cargo lint
+    
