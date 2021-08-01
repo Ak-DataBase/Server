@@ -1,18 +1,18 @@
 name: Lint
 
 on:
-	push:
-		branches:
-			- dom
-			- sub
-	pull_request:
-		branches:
-			- dom
-			- sub
+  push:
+    branches:
+      - dom
+      - sub
+  pull_request:
+    branches:
+      - dom
+      - sub
 
 jobs:
-	lint:
-		name: Lint
-		steps:
-		- run: cargo lint
-		
+  lint:
+    name: Lint
+    steps:
+    - run: cargo lint
+    

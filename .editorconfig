@@ -5,3 +5,6 @@ tab_width = 2
 indent_style = tab
 indent_size = 2
 end_of_line = lf
+
+[*.yml]
+indent_style = space

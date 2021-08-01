@@ -1,6 +1,8 @@
-use super::{args, cli};
+use super::super::server;
+use super::args;
 
-pub fn run(args: args::Arguments) -> anyhow::Result<()> {
-	cli::match_cmds(args)?;
+pub async fn run(args: args::Arguments) -> anyhow::Result<()> {
+	let port = args.port();
+	server::run(port).await?;
 	Ok(())
 }

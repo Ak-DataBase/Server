@@ -1,6 +1,6 @@
 // args.rs - Argument parsing
-use structopt::StructOpt;
 use super::super::server::default_port;
+use structopt::StructOpt;
 
 #[derive(Debug, StructOpt, PartialEq, Clone)]
 pub struct Arguments {
