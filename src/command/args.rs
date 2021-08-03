@@ -9,14 +9,14 @@ pub struct Arguments {
 
 	// Port (optional)
 	#[structopt(long, short)]
-	pub port: Option<i32>,
+	pub port: Option<i32>
 }
 
 impl Arguments {
 	pub fn port(&self) -> i32 {
 		match self.port {
 			None => default_port(),
-			Some(x) => x,
+			Some(x) => x
 		}
 	}
 }

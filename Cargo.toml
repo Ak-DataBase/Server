@@ -1,8 +1,6 @@
 [dependencies]
 structopt = "0.3.21"
 anyhow = "1.0.42"
-tokio = { version = "1", features = ["full"] }
-warp = "0.3"
 
 [package]
 name = "akdb-server"

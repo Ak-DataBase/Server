@@ -2,8 +2,7 @@
 mod command;
 mod server;
 
-#[tokio::main]
-async fn main() -> anyhow::Result<()> {
-	command::main().await?;
+fn main() -> anyhow::Result<()> {
+	command::main()?;
 	Ok(())
 }
