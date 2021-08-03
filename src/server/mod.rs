@@ -5,6 +5,18 @@ mod utils;
 use utils::request::Request;
 use utils::response::{RawResponse, Response};
 
+mod routes;
+use routes::{get::get, set::set};
+
+pub fn response404() -> Response {
+	Response {
+		status: 404,
+		status_info: Some("Not Found".to_string()),
+		body: "404".to_string(),
+		content_type: "text/plain".to_string()
+	}
+}
+
 pub fn default_port() -> i32 {
 	7878
 }
@@ -12,15 +24,12 @@ pub fn default_port() -> i32 {
 pub fn handle(stream: TcpStream) {
 	let raw_req = RawResponse::read(&stream);
 	let req = Request::new(raw_req);
-	let res = Response {
-		body: "test".to_string(),
-		content_type: "text/plain".to_string(),
-		status: 200,
-		status_info: Some("OK".to_string())
+	let res: Response = match &req.sub_url as &str {
+		"/get" => get(req),
+		"/set" => set(req),
+		_ => response404()
 	};
-	println!("{:?}\n{:?}", req, res);
-	let response_str = RawResponse::from_res(res);
-	RawResponse::write(stream, response_str);
+	RawResponse::write(stream, RawResponse::from_res(res));
 }
 
 pub fn run(port: i32) -> anyhow::Result<()> {

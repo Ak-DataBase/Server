@@ -26,7 +26,7 @@ impl RawResponse {
 
 	pub fn write(mut stream: TcpStream, response: String) {
 		match stream.write(response.as_bytes()) {
-			Ok(_) => println!("Response sent"),
+			Ok(_) => (),
 			Err(e) => println!("Failed sending response: {}", e)
 		}
 	}
