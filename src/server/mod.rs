@@ -2,10 +2,8 @@ use std::net::{TcpListener, TcpStream};
 use std::thread;
 
 mod utils;
-use utils::{
-	request::{Request, Response},
-	response::RawResponse
-};
+use utils::request::Request;
+use utils::response::{RawResponse, Response};
 
 pub fn default_port() -> i32 {
 	7878
@@ -21,7 +19,7 @@ pub fn handle(stream: TcpStream) {
 		status_info: Some("OK".to_string())
 	};
 	println!("{:?}\n{:?}", req, res);
-	let response_str = RawResponse::new_res(res);
+	let response_str = RawResponse::from_res(res);
 	RawResponse::write(stream, response_str);
 }
 

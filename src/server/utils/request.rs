@@ -1,12 +1,4 @@
 #[derive(Debug, Clone)]
-pub struct Response {
-	pub body: String,
-	pub content_type: String,
-	pub status: i16,
-	pub status_info: Option<String>
-}
-
-#[derive(Debug, Clone)]
 pub struct PostInfo {
 	pub body: String,
 	pub content_length: i32,

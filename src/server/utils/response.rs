@@ -1,10 +1,18 @@
-use super::request::Response;
 use std::io::{Read, Write};
 use std::net::TcpStream;
+
+#[derive(Debug, Clone)]
+pub struct Response {
+	pub body: String,
+	pub content_type: String,
+	pub status: i16,
+	pub status_info: Option<String>
+}
+
 pub struct RawResponse;
 
 impl RawResponse {
-	pub fn new_res(res: Response) -> String {
+	pub fn from_res(res: Response) -> String {
 		let status_info: String = match res.status_info {
 			Some(x) => format!(" {}", x),
 			None => "".to_string()
