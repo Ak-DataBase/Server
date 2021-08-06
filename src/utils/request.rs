@@ -1,11 +1,11 @@
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct PostInfo {
 	pub body: String,
 	pub content_length: i32,
 	pub content_type: String
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct Request {
 	pub method: String,
 	pub sub_url: String,

@@ -2,6 +2,8 @@
 mod cli;
 mod routes;
 mod server;
+#[cfg(test)]
+mod tests;
 mod utils;
 
 pub(crate) use structopt::StructOpt;
