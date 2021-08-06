@@ -18,23 +18,25 @@ impl Request {
 		let words_in_first_line: Vec<&str> = lines[0].split(' ').collect();
 		let method = words_in_first_line[0].to_string();
 		let sub_url = words_in_first_line[1].to_string();
-		let mut post_info: Option<PostInfo> = None;
 
-		if method == "POST" {
-			let content_length_line_words: Vec<&str> = lines[5].split(' ').collect();
-			let content_length_str = content_length_line_words[content_length_line_words.len() - 1];
-			let content_type_line_words: Vec<&str> = lines[4].split(' ').collect();
-			let content_type = content_type_line_words[1].trim().to_string();
-			let content_length = content_length_str.trim().parse::<i32>().unwrap();
-			let unfiltered_body = lines[lines.len() - 1].to_string();
-			let body = unfiltered_body[..content_length as usize].to_string();
+		let post_info: Option<PostInfo> = match &method as &str {
+			"POST" => {
+				let content_length_line_words: Vec<&str> = lines[5].split(' ').collect();
+				let content_length_str = content_length_line_words[content_length_line_words.len() - 1];
+				let content_type_line_words: Vec<&str> = lines[4].split(' ').collect();
+				let content_type = content_type_line_words[1].trim().to_string();
+				let content_length = content_length_str.trim().parse::<i32>().unwrap();
+				let unfiltered_body = lines[lines.len() - 1];
+				let body = unfiltered_body[..content_length as usize].to_string();
 
-			post_info = Some(PostInfo {
-				body,
-				content_length,
-				content_type
-			})
-		}
+				Some(PostInfo {
+					body,
+					content_length,
+					content_type
+				})
+			}
+			_ => None
+		};
 
 		Self {
 			method,
