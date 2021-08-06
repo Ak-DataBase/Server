@@ -2,12 +2,9 @@ use std::io::Read;
 use std::net::{TcpListener, TcpStream};
 use std::thread;
 
-mod utils;
-use utils::request::Request;
-use utils::response::Response;
-
-mod routes;
-use routes::{get::get, set::set};
+use crate::routes::{get::get, set::set};
+use crate::utils::request::Request;
+use crate::utils::response::Response;
 
 pub fn response404() -> Response {
 	Response {

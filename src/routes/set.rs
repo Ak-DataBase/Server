@@ -1,4 +1,4 @@
-use crate::server::utils::{request::Request, response::Response};
+use crate::utils::{request::Request, response::Response};
 
 pub fn set(_: Request) -> Response {
 	Response {
