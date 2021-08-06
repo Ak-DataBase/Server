@@ -20,7 +20,7 @@ impl Request {
 		let sub_url = words_in_first_line[1].to_string();
 		let mut post_info: Option<PostInfo> = None;
 
-		if method == "POST".to_string() {
+		if method == "POST" {
 			let content_length_line_words: Vec<&str> = lines[5].split(' ').collect();
 			let content_length_str = content_length_line_words[content_length_line_words.len() - 1];
 			let content_type_line_words: Vec<&str> = lines[4].split(' ').collect();
