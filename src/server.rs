@@ -2,7 +2,7 @@ use std::io::Read;
 use std::net::{TcpListener, TcpStream};
 use std::thread;
 
-use crate::routes::{get::get, set::set};
+use crate::db::{get::get, set::set};
 use crate::utils::request::Request;
 use crate::utils::response::Response;
 

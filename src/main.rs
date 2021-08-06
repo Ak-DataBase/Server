@@ -1,6 +1,6 @@
 // main.rs - Main file. Executes cli + server
 mod cli;
-mod routes;
+mod db;
 mod server;
 #[cfg(test)]
 mod tests;
