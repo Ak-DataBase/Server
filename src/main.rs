@@ -4,7 +4,7 @@ mod routes;
 mod server;
 mod utils;
 
-pub use structopt::StructOpt;
+pub(crate) use structopt::StructOpt;
 
 fn main() {
 	let args = cli::Arguments::from_args();
