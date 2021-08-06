@@ -1,9 +1,10 @@
+use std::io::Read;
 use std::net::{TcpListener, TcpStream};
 use std::thread;
 
 mod utils;
 use utils::request::Request;
-use utils::response::{RawResponse, Response};
+use utils::response::Response;
 
 mod routes;
 use routes::{get::get, set::set};
@@ -17,16 +18,24 @@ pub fn response404() -> Response {
 	}
 }
 
+pub fn read(mut stream: &TcpStream) -> String {
+	let mut buf = [0u8; 4096];
+	match stream.read(&mut buf) {
+		Ok(_) => String::from_utf8_lossy(&buf).to_string(),
+		Err(e) => panic!("Error reading stream: {}", e)
+	}
+}
+
 pub const DEFAULT_PORT: i32 = 7878;
 
 pub fn handle(stream: TcpStream) {
-	let req = Request::new(RawResponse::read(&stream));
+	let req = Request::new(read(&stream));
 	let res: Response = match &req.sub_url as &str {
 		"/get" => get(req),
 		"/set" => set(req),
 		_ => response404()
 	};
-	RawResponse::write(stream, RawResponse::from_res(res));
+	res.write(stream);
 }
 
 pub fn run(port: i32) {
