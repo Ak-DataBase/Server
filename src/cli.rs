@@ -1,5 +1,5 @@
-// args.rs - Argument parsing
-use super::super::server::default_port;
+// cli.rs - Argument parsing
+use crate::server::DEFAULT_PORT;
 use structopt::StructOpt;
 
 #[derive(Debug, StructOpt, PartialEq, Clone)]
@@ -15,7 +15,7 @@ pub struct Arguments {
 impl Arguments {
 	pub fn port(&self) -> i32 {
 		match self.port {
-			None => default_port(),
+			None => DEFAULT_PORT,
 			Some(x) => x
 		}
 	}

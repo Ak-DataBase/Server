@@ -1,6 +1,5 @@
 [dependencies]
 structopt = "0.3.21"
-anyhow = "1.0.42"
 
 [package]
 name = "akdb-server"
