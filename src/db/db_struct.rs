@@ -48,6 +48,7 @@ impl DB {
 			id
 		};
 
+		ret.create_file();
 		ret.read();
 		ret.write();
 		ret
@@ -78,21 +79,24 @@ impl DB {
 		}
 	}
 
-	pub fn read(&mut self) {
+	pub fn read(&mut self) -> HashMap<String, DBValue> {
+		let contents = read_file(self.file.clone()).unwrap();
+
+		if contents.is_empty() {
+			return HashMap::new();
+		}
+
+		let res: HashMap<String, DBValue> = bincode::deserialize(&contents[..]).unwrap();
+		self.data = res.clone();
+		res
+	}
+
+	fn create_file(&self) {
 		if !self.file.exists() {
 			match File::create(self.file.clone()) {
 				Ok(_) => (),
 				Err(e) => panic!("Can't create DB file and file does not exist: {}", e)
 			};
 		}
-
-		let contents = read_file(self.file.clone()).unwrap();
-
-		if contents.is_empty() {
-			return;
-		}
-
-		let res: HashMap<String, DBValue> = bincode::deserialize(&contents[..]).unwrap();
-		self.data = res;
 	}
 }
