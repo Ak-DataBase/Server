@@ -39,8 +39,7 @@ pub struct DB {
 #[allow(dead_code)]
 impl DB {
 	pub fn new(id: String) -> Self {
-		let created_path = default_db_folder().join(id.clone());
-		let file = created_path.clone();
+		let file = default_db_folder().join(id.clone());
 
 		let mut ret = Self {
 			data: HashMap::new(),
@@ -72,7 +71,7 @@ impl DB {
 	fn write(&self) {
 		let res = bincode::serialize(&self.data.clone()).unwrap();
 
-		match write_file(self.file.clone(), res.clone()) {
+		match write_file(self.file.clone(), res) {
 			Ok(_) => (),
 			Err(e) => panic!("Error writing DB file: {}", e)
 		}
@@ -88,7 +87,7 @@ impl DB {
 
 		let contents = read_file(self.file.clone()).unwrap();
 
-		if contents.len() == 0 {
+		if contents.is_empty() {
 			return;
 		}
 

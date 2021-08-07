@@ -1,4 +1,4 @@
-use crate::db::db::{DBValue, DB};
+use crate::db::db_struct::{DBValue, DB};
 
 #[test]
 pub fn db() {
