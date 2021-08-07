@@ -38,7 +38,8 @@ pub struct DB {
 
 #[allow(dead_code)]
 impl DB {
-	pub fn new(id: String) -> Self {
+	pub fn new(id: &'static str) -> Self {
+		let id = id.to_string();
 		let file = default_db_folder().join(id.clone());
 
 		let mut ret = Self {
