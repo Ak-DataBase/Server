@@ -64,10 +64,10 @@ impl DB {
 		self.data.get(key)
 	}
 
-	pub fn set(&mut self, key: &'static str, val: DBValue) -> Option<DBValue> {
-		let ret = self.data.insert(key.to_string(), val);
+	pub fn set(&mut self, key: &'static str, val: DBValue) -> &mut Self {
+		self.data.insert(key.to_string(), val);
 		self.write();
-		ret
+		self
 	}
 
 	fn write(&self) {
