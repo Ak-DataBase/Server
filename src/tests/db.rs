@@ -10,4 +10,7 @@ pub fn db() {
 
 	let db2 = DB::new("RUST_TESTS");
 	assert_eq!(db2.get("x"), db.get("x"));
+	assert_eq!(db.data.len(), 1);
+	assert_eq!(db2.data.len(), 1);
+	assert_eq!(db.get("x"), db2.data.get("x"));
 }

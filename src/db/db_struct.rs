@@ -31,7 +31,7 @@ pub enum DBValue {
 
 #[derive(Deserialize, Serialize, PartialEq, Debug, Clone)]
 pub struct DB {
-	data: HashMap<String, DBValue>,
+	pub data: HashMap<String, DBValue>,
 	pub file: PathBuf,
 	pub id: String
 }
