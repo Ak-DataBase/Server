@@ -18,9 +18,10 @@ impl Request {
 		let words_in_first_line: Vec<&str> = lines[0].split(' ').collect();
 		let method = words_in_first_line[0].to_string();
 		let sub_url = words_in_first_line[1].to_string();
+		let post_info: Option<PostInfo>;
 
-		let post_info: Option<PostInfo> = match &method as &str {
-			"POST" => {
+		if lines.len() > 5 {
+			post_info = {
 				let content_length_line_words: Vec<&str> = lines[5].split(' ').collect();
 				let content_length_str = content_length_line_words[content_length_line_words.len() - 1];
 				let content_type_line_words: Vec<&str> = lines[4].split(' ').collect();
@@ -35,7 +36,8 @@ impl Request {
 					content_type
 				})
 			}
-			_ => None
+		} else {
+			post_info = None
 		};
 
 		Self {

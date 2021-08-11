@@ -46,22 +46,4 @@ abc"#
 				.to_string()
 		)
 	);
-
-	assert_eq!(
-		Request {
-			method: "GET".to_string(),
-			post_info: None,
-			sub_url: "/".to_string()
-		},
-		Request::new(
-			r#"GET / HTTP/2
-Host: www.example.com
-User-Agent: curl/7.54.0
-Accept: */*
-Content-Type: text/plain
-Content-Length: 3
-abc"#
-				.to_string()
-		)
-	)
 }
