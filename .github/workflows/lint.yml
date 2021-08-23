@@ -14,4 +14,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: rustup component add clippy --toolchain nightly-x86_64-unknown-linux-gnu && cargo lint
+      - run: rustup component add clippy && cargo lint
