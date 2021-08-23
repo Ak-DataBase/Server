@@ -1,6 +1,6 @@
 use crate::utils::response::Response;
 
-pub const JSON: &str = "application/json";
+pub static JSON: &str = "application/json";
 
 pub fn bad_request_str(body: String, content_type: &'static str) -> Response {
 	Response {

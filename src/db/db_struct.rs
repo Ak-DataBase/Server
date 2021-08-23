@@ -45,7 +45,7 @@ impl DB {
 	}
 
 	pub fn exists(id: String) -> bool {
-		default_db_folder().join(id.clone()).exists()
+		default_db_folder().join(id).exists()
 	}
 
 	pub fn clear(&mut self) -> &mut Self {

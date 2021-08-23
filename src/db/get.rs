@@ -6,8 +6,7 @@ use serde::Deserialize;
 #[derive(Debug, Deserialize)]
 pub struct GetBody {
 	db_id: String,
-	key: String,
-	auth: String
+	key: String
 }
 
 pub fn get(req: Request) -> Response {
@@ -51,7 +50,7 @@ pub fn get(req: Request) -> Response {
 			return bad_request(format!(
 				"No value with key \"{}\" found in DB with id \"{}\"",
 				body.key,
-				id.clone()
+				id
 			))
 		}
 	};
