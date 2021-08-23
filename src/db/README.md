@@ -1,3 +1,3 @@
-# `src/routes`
+# `src/db`
 
-Here there are all the server routes.
+Db struct and routes
