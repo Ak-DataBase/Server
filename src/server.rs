@@ -1,6 +1,7 @@
 use std::io::Read;
 use std::net::{TcpListener, TcpStream};
 use std::thread;
+use std::time::{Duration, Instant};
 
 use crate::db::{get::get, set::set};
 use crate::utils::request::Request;
@@ -23,19 +24,29 @@ pub fn read(mut stream: &TcpStream) -> String {
 	}
 }
 
-pub const DEFAULT_PORT: i32 = 7878;
+pub const DEFAULT_PORT: &'static str = "7878";
 
 pub fn handle(stream: TcpStream) {
+	let before = Instant::now();
 	let req = Request::new(read(&stream));
 	let res: Response = match &req.sub_url as &str {
-		"/get" => get(req),
-		"/set" => set(req),
+		"/get" => get(req.clone()),
+		"/set" => set(req.clone()),
 		_ => response404()
 	};
 	res.write(stream);
+
+	thread::sleep(Duration::from_secs(2));
+
+	println!(
+		"{} {} - Elapsed time: {:?}",
+		req.method,
+		req.sub_url,
+		before.elapsed()
+	);
 }
 
-pub fn run(port: i32) {
+pub fn run(port: String) {
 	println!("Starting server...");
 
 	let addr = format!("127.0.0.1:{}", port);

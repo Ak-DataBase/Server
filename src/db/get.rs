@@ -49,8 +49,7 @@ pub fn get(req: Request) -> Response {
 		None => {
 			return bad_request(format!(
 				"No value with key \"{}\" found in DB with id \"{}\"",
-				body.key,
-				id
+				body.key, id
 			))
 		}
 	};

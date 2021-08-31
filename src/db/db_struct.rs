@@ -1,8 +1,11 @@
 use serde::{Deserialize, Serialize};
 use serde_json::value::Value;
-use std::collections::HashMap;
-use std::fs::{create_dir, read as read_file, write as write_file, File};
-use std::path::PathBuf;
+use std::{
+	collections::HashMap,
+	fs::{create_dir, read, read_to_string, File},
+	io::Write,
+	path::PathBuf
+};
 
 pub fn default_db_folder() -> PathBuf {
 	let home = match dirs::home_dir() {
@@ -65,22 +68,27 @@ impl DB {
 	}
 
 	fn write(&self) {
-		let res = bincode::serialize(&self.data.clone()).unwrap();
+		let data = &self.data.clone();
+		let data_str = serde_json::to_string(data).unwrap();
+		let res = data_str.as_bytes();
 
-		match write_file(self.file.clone(), res) {
+		match File::create(self.file.clone()).unwrap().write(res) {
 			Ok(_) => (),
 			Err(e) => panic!("Error writing DB file: {}", e)
 		}
 	}
 
 	pub fn read(&mut self) -> HashMap<String, Value> {
-		let contents = read_file(self.file.clone()).unwrap();
+		let contents = read(self.file.clone()).unwrap();
+		let contents_str = read_to_string(self.file.clone()).unwrap();
 
-		if contents.is_empty() {
+		if contents_str.trim().is_empty() {
 			return HashMap::new();
 		}
 
-		let res: HashMap<String, Value> = bincode::deserialize(&contents[..]).unwrap();
+		let data = String::from_utf8(contents).unwrap();
+
+		let res: HashMap<String, Value> = serde_json::from_str(&data[..]).unwrap();
 		self.data = res.clone();
 		res
 	}

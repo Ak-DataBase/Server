@@ -8,15 +8,6 @@ pub struct Arguments {
 	pub arguments: Vec<String>,
 
 	// Port (optional)
-	#[structopt(long, short)]
-	pub port: Option<i32>
-}
-
-impl Arguments {
-	pub fn port(&self) -> i32 {
-		match self.port {
-			None => DEFAULT_PORT,
-			Some(x) => x
-		}
-	}
+	#[structopt(long, short, default_value = DEFAULT_PORT)]
+	pub port: i32
 }

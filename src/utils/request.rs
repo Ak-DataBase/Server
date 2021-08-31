@@ -25,8 +25,14 @@ impl Request {
 				let content_length_line_words: Vec<&str> = lines[5].split(' ').collect();
 				let content_length_str = content_length_line_words[content_length_line_words.len() - 1];
 				let content_type_line_words: Vec<&str> = lines[4].split(' ').collect();
-				let content_type = content_type_line_words[1].trim().to_string();
-				let content_length = content_length_str.trim().parse::<i32>().unwrap();
+				let content_type = {
+					if content_type_line_words.len() > 1 {
+						content_type_line_words[1].trim().to_string()
+					} else {
+						"text/plain".to_string()
+					}
+				};
+				let content_length = content_length_str.trim().parse::<i32>().unwrap_or(0);
 				let unfiltered_body = lines[lines.len() - 1];
 				let body = unfiltered_body[..content_length as usize].to_string();
 
