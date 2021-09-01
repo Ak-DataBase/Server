@@ -36,8 +36,6 @@ pub fn handle(stream: TcpStream) {
 	};
 	res.write(stream);
 
-	thread::sleep(Duration::from_secs(2));
-
 	println!(
 		"{} {} - Elapsed time: {:?}",
 		req.method,
@@ -46,7 +44,7 @@ pub fn handle(stream: TcpStream) {
 	);
 }
 
-pub fn run(port: String) {
+pub fn run(port: i32) {
 	println!("Starting server...");
 
 	let addr = format!("127.0.0.1:{}", port);

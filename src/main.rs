@@ -10,5 +10,5 @@ pub(crate) use structopt::StructOpt;
 
 fn main() {
 	let args = cli::Arguments::from_args();
-	server::run(args.port.to_string());
+	server::run(args.port);
 }
